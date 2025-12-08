@@ -70,24 +70,49 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        body: Center(
+        body: SingleChildScrollView(
+        child: Center(
           child: Column(
             children: [
               Container(
                 child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: BoxBorder.all(color: Colors.indigo, width: 5),
-                        borderRadius: BorderRadius.circular(80),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.person),
-                        iconSize: 120,
+                    ClipOval(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+
+                        /*child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.person),
+                          iconSize: 120,
+                        ),*/
+
+                        child: Image.asset(
+                          "assets/image1.png",
+                          width: 170,
+                          height: 170,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
+                    /*ClipOval(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.indigo, width: 5),
+                          shape: BoxShape.circle, // Important
+                        ),
+                        child: Image.asset(
+                          "assets/image1.png",
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),*/
+
                     const SizedBox(height: 10),
                     Container(
                       child: Column(
@@ -161,29 +186,82 @@ class MyApp extends StatelessWidget {
                       "Voici un code Flutter complet pour reproduire exactement ton design :Voici un code Flutter complet pour reproduire exactement ton design : Voici un code Flutter complet pour reproduire exactement ton design :Voici un code Flutter complet pour reproduire exactement ton design : Voici un code Flutter complet pour reproduire exactement ton design :",
                       style: TextStyle(color: Colors.white70, fontSize: 12),
                     ),
+
+                    SizedBox(height: 20,),
+
                     Container(
-                      //decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                      width: 250,
-                      color: Colors.indigo,
+                      decoration: BoxDecoration(
+                          color: Colors.indigo,
+                          borderRadius: BorderRadius.circular(10)),
+
+                      width: 300,
+                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+
                       child: Center(
                         child: Row(
                           children: [
                             Icon(Icons.cloud_upload_outlined),
                             SizedBox(width: 10),
                             Text(
-                              "Uploder une musique",
+                              "Uploader une musique",
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
                         ),
                       ),
                     ),
+
+
                   ],
                 ),
               ),
+
+              SizedBox(height: 15),
+
+              Container(
+                child: Column(
+                  children: [
+                    Text("Musique Preferée", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      
+                      child: Row(
+                        children: [
+                          Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  
+                                  child: Image.asset(
+                                    "assets/image1.png",
+                                    width: 170,
+                                    height: 170,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                
+                                Text("Chasse à l'homme", style: TextStyle(color: Colors.white),),
+                                Text("clashe criminel", style: TextStyle(color: Colors.white70, fontSize: 12),)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+
             ],
           ),
         ),
+      ),
       ),
     );
   }
