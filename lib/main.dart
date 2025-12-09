@@ -220,42 +220,43 @@ class MyApp extends StatelessWidget {
 
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Musique Preferée", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
-                      
-                      child: Row(
-                        children: [
-                          Container(
-                            child: Column(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  
-                                  child: Image.asset(
-                                    "assets/image1.png",
-                                    width: 170,
-                                    height: 170,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                
-                                Text("Chasse à l'homme", style: TextStyle(color: Colors.white),),
-                                Text("clashe criminel", style: TextStyle(color: Colors.white70, fontSize: 12),)
-                              ],
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "Musique Preferée",
+                      style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
                       ),
                     ),
+
+                    SizedBox(height: 10),
+
+                    SizedBox(
+                    height: 240,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      children: [
+                        _blocFavoris("Chasse à l'homme", "Clashe criminel", "assets/clashe.png"),
+                        SizedBox(width: 15),
+                        _blocFavoris("Loin des etoiles", "MMZ", "assets/mmz.png"),
+                        SizedBox(width: 15),
+                        _blocFavoris("Est ce que tu m'aime?", "Maitre Gims", "assets/gims.png"),
+                        SizedBox(width: 15),
+                        _blocFavoris("Jefe", "Ninho", "assets/ninho.png"),
+                        SizedBox(width: 15),
+                        _blocFavoris("Je me retire", "Gims", "assets/gims.png"),
+                        SizedBox(width: 15),
+                        _blocFavoris("Bardée", "Keblack", "assets/musique.jpg"),
+                      ],
+                    ),
+                  ),
                   ],
                 ),
               ),
+
               SizedBox(height: 15),
 
             ],
@@ -286,6 +287,38 @@ class MyApp extends StatelessWidget {
 
   Widget _divider() {
     return Container(height: 35, width: 1.3, color: Colors.indigo);
+  }
+
+
+  Widget _blocFavoris(titre, nom, photo){
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              photo,
+              width: 170,
+              height: 170,
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          SizedBox(height: 8),
+
+          Text(
+            titre,
+            style: TextStyle(color: Colors.white),
+          ),
+
+          Text(
+            nom,
+            style: TextStyle(color: Colors.white70, fontSize: 12),
+          ),
+        ],
+      ),
+    );
   }
 }
 
