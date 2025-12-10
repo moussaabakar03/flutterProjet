@@ -2,57 +2,85 @@ import 'package:flutter/material.dart';
 import 'navAccueil.dart';
 
 
-// Page principale
+
+// page principale
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Navigation en haut
-        Navaccueil(),
+    // structure principale de la page
+    return Scaffold(
+      // couleur de fond
+      backgroundColor: const Color(0xFF0F0F0F),
 
-        // Contenu principal et mini player
-        Expanded(
-          child: Column(
-            children: [
-              // Liste des sections avec défilement
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.all(12),
-                  children: [
-                    sectionTitle("écoutez à nouveau"),
-                    albumList(),
+      // barre du haut
+      appBar: AppBar(
+        // fond transparent
+        backgroundColor: Colors.transparent,
 
-                    const SizedBox(height: 20),
+        // enlever l’ombre
+        elevation: 0,
 
-                    sectionTitle("recommandé pour vous"),
-                    albumList(),
+        // titre de la barre
+        title: const Text("RECHERCHER"),
 
-                    const SizedBox(height: 20),
+        // icône à droite
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 12),
+            child: Icon(Icons.mic),
+          )
+        ],
+      ),
 
-                    sectionTitle("top charts"),
-                    albumList(),
-                  ],
-                ),
+      // contenu principal
+      body: Column(
+        children: [
+          // partie qui prend tout l’espace
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(12),
+
+              // empilement vertical des sections
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // titre de section
+                  sectionTitle("écoutez à nouveau"),
+
+                  // liste des albums
+                  albumList(),
+
+                  const SizedBox(height: 20),
+
+                  sectionTitle("recommandé pour vous"),
+                  albumList(),
+
+                  const SizedBox(height: 20),
+
+                  sectionTitle("top charts"),
+                  albumList(),
+                ],
               ),
-
-              // Mini player en bas
-              miniPlayer(),
-            ],
+            ),
           ),
-        ),
-      ],
+
+          // mini lecteur de musique
+          miniPlayer(),
+        ],
+      ),
+
     );
   }
 }
 
-
-// titre de section
+// widget du titre de chaque section
 Widget sectionTitle(String title) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
+
+    // affichage du texte
     child: Text(
       title,
       style: const TextStyle(
@@ -63,26 +91,119 @@ Widget sectionTitle(String title) {
   );
 }
 
-// liste horizontale d’albums
+// widget de la liste horizontale des albums
 Widget albumList() {
+  // Liste des images (assets) des albums
+  final List<String> albums = [
+    'assets/ninho.png',
+    'assets/mmz.png',
+    'assets/ninho.png',
+    'assets/ninho.png',
+    'assets/gims.png',
+    'assets/ninho.png',
+    'assets/ninho.png',
+    'assets/clashe.png',
+    'assets/ninho.png',
+    'assets/ninho.png',
+
+  ];
+
   return SizedBox(
     height: 120,
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: 10,
+      itemCount: albums.length,
       itemBuilder: (context, index) {
         return Container(
           width: 100,
           margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(
-            color: Colors.grey.shade800,
             borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 5,
+                offset: Offset(2, 3),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              albums[index],
+              fit: BoxFit.cover,
+            ),
           ),
         );
       },
     ),
   );
 }
+
+// widget du mini lecteur
+Widget miniPlayer() {
+  return Container(
+    height: 70,
+    padding: const EdgeInsets.symmetric(horizontal: 12),
+
+    // décoration du bas
+    decoration: const BoxDecoration(
+      color: Color(0xFF1A1A1A),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(15),
+      ),
+    ),
+
+    // affichage en ligne
+    child: Row(
+      children: [
+        // pochette
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.indigo,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: const Icon(Icons.music_note),
+        ),
+
+        const SizedBox(width: 10),
+
+        // infos musique
+        const Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "titre de la musique",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "nom de l'artiste",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+
+        // bouton pause
+        IconButton(
+          icon: const Icon(Icons.pause),
+          onPressed: () {},
+        ),
+
+        // bouton menu
+        IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {},
+        ),
+      ],
+    ),
+  );
+}
+
 
 /*
 // liste horizontale d’albums
@@ -135,53 +256,3 @@ Widget albumList() {
 }
 */
 // mini player
-Widget miniPlayer() {
-  return Container(
-    height: 70,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    decoration: const BoxDecoration(
-      color: Color(0xFF1A1A1A),
-      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-    ),
-    child: Row(
-      children: [
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.indigo,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: const Icon(Icons.music_note),
-        ),
-        const SizedBox(width: 10),
-
-        const Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "titre de la musique",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "nom de l'artiste",
-                style: TextStyle(color: Colors.grey),
-              ),
-            ],
-          ),
-        ),
-
-        IconButton(
-          icon: const Icon(Icons.pause),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-      ],
-    ),
-  );
-}

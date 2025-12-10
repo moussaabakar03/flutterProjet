@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
           unselectedItemColor: Colors.white70,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Accueil"),
-            BottomNavigationBarItem(icon: Icon(Icons.library_books), label: "Bibliothèque"),
+            BottomNavigationBarItem(icon: Icon(Icons.library_music), label: "Bibliothèque"),
             BottomNavigationBarItem(
               icon: Icon(Icons.play_arrow),
               label: "Lecture",
